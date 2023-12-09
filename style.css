@@ -1,0 +1,40 @@
+
+a{
+    text-decoration:none;
+  }
+  body{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgb(255, 211, 158);
+  }
+  .header {
+    padding: 100px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-size: 51px;
+  }
+  h1{
+     text-align: center;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+   /* Create two equal columns that floats next to each other */
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  
+      
