@@ -6,12 +6,12 @@ a{
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: rgb(255, 211, 158);
+  background-color: rgb(158, 231, 255);
   }
   .header {
     padding: 100px;
     text-align: center;
-    color: rgb(0, 0, 0);
+    color: rgba(83, 152, 231, 0.541);
     font-size: 51px;
   }
   h1{
