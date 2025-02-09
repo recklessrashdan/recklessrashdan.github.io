@@ -1,58 +1,89 @@
-<html>
-  <head>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  
-  <body>
-    <div class="header"><h1>Rashdan Rishan</h1>
-      <p>Student at Zahira College</p>
-      <h1>Welcome</h1>
-      <p>I am Rashdan from Zahira College.I love IT .I do scratch coding class.I am in grade 6. I am a pro on rubiks cubes.</p>
-      
-     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiDd_7U5OWh4f6F-K7iYbZz9hf_VgFxXUaaQ&usqp=CAU align="left">
-      <hr>
-      <h1>What I'm good at</h1>
-      
-  
-      <div class="row">
-        <div class="column" style="background-color:#778899;">
-          <h2>Drawing</h2>
-          <p>I draw nice picures</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            animation: fadeIn 2s ease-in;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            animation: slideIn 1.5s ease-in-out;
+        }
+        h1 {
+            color: #2c3e50;
+            animation: popIn 1.5s ease-in-out;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+        .btn {
+            display: inline-block;
+            background: #ff4757;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .btn:hover {
+            background: #e84118;
+            transform: scale(1.1) rotate(5deg);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Assalamualaikum</h1>
+        <div class="section">
+            <h2>About Me</h2>
+            <p>Hi! I'm [Your Name]. I love creating things, especially related to gaming and online communities. I study at Lyceum International (LNU), where I continue to develop my skills and passions.</p>
         </div>
-        <div class="column" style="background-color:#778899;">
-          <h2>Carrom Master</h2>
-          <p>Beating everyone in my house in carrom but except my Grandfather </p>
+        <div class="section">
+            <h2>My Interests</h2>
+            <p>I'm passionate about action stories, football, carrom, and hosting giveaways. I love football and aspire to become the best defender, mastering my positioning and tackling skills. In carrom, my goal is to become the GOAT, refining my accuracy and strategic play to dominate every match.</p>
         </div>
-      </div>
-      
-      
-      <hr>
-      <h1>My Projects</h1>
-      
-      <p> I've been learning to create web pages at
-      Techkids Code Club
-      .I'm using the 
-      <!-- <a href="https://trinket.io/library/trinkets/b66a95c73a">Trinket</a>  -->
-      editor.
-      </p>
-      
-      <ol>
-        <p>1.Happy Birthday</p>
-        <p>2.Flappy birthday</p>
-      
-      <h2 id="birthday">Happy Birthday</h2>
-      <!-- <p>The <a href="https://trinket.io/html/e996dc0380">Happy Birthday Project</a></p> -->
-      
-      <iframe src="https://trinket.io/embed/html/e996dc0380?toggleCode=true&runMode=autorun" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-      
-      
-      <h2>flappy parrot</h2>
-      <p>The <a href="https://scratch.mit.edu/projects/880652001/embed"> flappy parrot </a>
-      </p>
-     <iframe src="https://scratch.mit.edu/projects/880652001/embed"width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-  
-  
-       <a href="https://recklessrashdan.github.io/MyScratchProjects.html">tap to see my scratch projects</a>
-       <button><a href="https://discord.gg/PTx99PXK">tap to join my discord server</a></button>
-    </body>
-   </html>
+        <div class="section">
+            <h2>My Roblox Group</h2>
+            <p>Check out my Roblox group where we run giveaways and exciting events!</p>
+            <p>Our group focuses on stylish and trendy clothing for Roblox avatars. We create unique designs that help players express themselves in the game. Join us to explore the latest fashion trends and get exclusive outfits!</p>
+            <a href="https://www.roblox.com/communities/34354197/HR-Wadrobe-Clothing#!/about" class="btn">Visit My Group</a>
+        </div>
+    </div>
+</body>
+</html>
