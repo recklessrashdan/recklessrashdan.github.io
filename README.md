@@ -1,7 +1,7 @@
 # recklessrashdan.github.io
 
-Hi, welcome to my personal website!  
-I'm 16 years old and created this site to share my projects, interests, and a bit about myself. The site is built and hosted using GitHub Pages. All the files you see here are what make the website work.
+Hi, welcome to my website!  
+I'm a beginner and created this site to share my projects, interests, and a bit about myself. The site is built and hosted using GitHub Pages. All the files you see here are what make the website work.
 
 ## What’s Here
 
