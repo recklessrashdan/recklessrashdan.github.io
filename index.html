@@ -3,87 +3,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me</title>
+    <title>Reckless Rashdan - Designer & Developer</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
-            color: #333;
-            text-align: center;
+        * {
             margin: 0;
             padding: 0;
-            animation: fadeIn 2s ease-in;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
         .container {
-            max-width: 800px;
-            margin: 50px auto;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            animation: slideIn 1.5s ease-in-out;
+            padding: 2rem 1.5rem;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
         }
-        h1 {
-            color: #2c3e50;
-            animation: popIn 1.5s ease-in-out;
-        }
-        .section {
-            margin: 20px 0;
-            padding: 15px;
-            border-radius: 8px;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #ff5722;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
-            animation: fadeInUp 1.5s ease-in-out;
+            font-size: 3rem;
+            overflow: hidden;
         }
-        .btn {
-            display: inline-block;
-            background: #ff4757;
-            color: white;
-            padding: 10px 20px;
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
             text-decoration: none;
+            color: #333;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-item:hover {
+            color: #ff5722;
+        }
+
+        .nav-item.active {
+            color: #ff5722;
+            font-weight: bold;
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .language-selector {
+            margin: 1.5rem 0;
+            padding: 0.8rem;
+            background: #f0f0f0;
             border-radius: 5px;
-            margin-top: 10px;
-            transition: background 0.3s, transform 0.3s;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s;
         }
-        .btn:hover {
-            background: #e84118;
-            transform: scale(1.1) rotate(5deg);
+
+        .language-selector:hover {
+            background: #e0e0e0;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background 0.3s;
+            font-size: 1rem;
         }
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+
+        .social-icon:hover {
+            background: #ff5722;
         }
-        @keyframes fadeInUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 1.5rem 2.5rem;
+            flex: 1;
+        }
+
+        .header-top {
+            display: none;
+        }
+
+        /* Code Snippet Box */
+        .code-box {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            max-width: 450px;
+        }
+
+        .code-box::before {
+            content: '';
+            position: absolute;
+            top: -0.8rem;
+            left: 1.5rem;
+            width: 35px;
+            height: 35px;
+            background: #ff5722;
+            border-radius: 6px 6px 0 0;
+            z-index: -1;
+        }
+
+        .code-line {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #333;
+            margin: 0.4rem 0;
+            font-family: 'Monaco', monospace;
+        }
+
+        .code-number {
+            color: #999;
+            margin-right: 0.8rem;
+        }
+
+        .keyword {
+            color: #333;
+        }
+
+        .string {
+            color: #ff5722;
+            font-weight: bold;
+        }
+
+        .intro-text {
+            margin: 1.5rem 0 2.5rem 0;
+            font-size: 0.95rem;
+            color: #666;
+            max-width: 550px;
+        }
+
+        .read-more {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2.5rem 0;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .read-more:hover {
+            color: #ff5722;
+        }
+
+        .read-more-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ff5722;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .read-more:hover .read-more-circle {
+            transform: translateY(3px);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 85px;
+            height: 85px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            font-size: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+
+            .code-box {
+                max-width: 100%;
+            }
+
+            .tech-icons {
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+
+            .header-top {
+                flex-direction: column;
+                gap: 1rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Assalamualaikum</h1>
-        <div class="section">
-            <h2>About Me</h2>
-            <p>Hi! I'm M.Rashdan Rishan . I love creating things, especially related to gaming and online communities. I study at Lyceum International (LNU), where I continue to develop my skills and passions.</p>
-        </div>
-        <div class="section">
-            <h2>My Interests</h2>
-            <p>I'm passionate about action stories, football, carrom, and hosting giveaways. I love football and aspire to become the best defender, mastering my positioning and tackling skills. In carrom, my goal is to become the GOAT, refining my accuracy and strategic play to dominate every match.</p>
-        </div>
-        <div class="section">
-            <h2>My Roblox Group</h2>
-            <p>Check out my Roblox group where we run giveaways and exciting events!</p>
-            <p>Our group focuses on stylish and trendy clothing for Roblox avatars. We create unique designs that help players express themselves in the game. Join us to explore the latest fashion trends and get exclusive outfits!</p>
-            <a href="https://www.roblox.com/communities/34354197/HR-Wadrobe-Clothing#!/about" class="btn">Visit My Group</a>
-        </div>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-image">👨‍💻</div>
+
+            <nav class="nav-menu">
+                <a href="#home" class="nav-item active">
+                    <span class="nav-icon">🏠</span>
+                    <span>Home</span>
+                </a>
+                <a href="#portfolio" class="nav-item">
+                    <span class="nav-icon">📁</span>
+                    <span>Portfolio</span>
+                </a>
+                <a href="#about" class="nav-item">
+                    <span class="nav-icon">❓</span>
+                    <span>Who am I ?</span>
+                </a>
+            </nav>
+
+            <div class="language-selector">FR</div>
+
+            <div class="social-links">
+                <a href="#instagram" class="social-icon">📷</a>
+                <a href="#linkedin" class="social-icon">💼</a>
+                <a href="#tiktok" class="social-icon">🎵</a>
+                <a href="#behance" class="social-icon">🎨</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+
+            <div class="code-box">
+                <div class="code-line"><span class="code-number">01</span><span class="keyword">&lt; Hi, I'm </span><span class="string">Rashdan</span><span class="keyword"> ! &gt;</span></div>
+                <div class="code-line"><span class="code-number">02</span><span class="keyword">&lt; I </span><span class="string">design</span><span class="keyword"> </span><span class="string">and</span><span class="keyword"> </span><span class="string">develop</span><span class="keyword"> 🌐</span></div>
+                <div class="code-line"><span class="code-number">03</span><span class="keyword">&lt; web sites . &gt;</span></div>
+            </div>
+
+            <p class="intro-text">I also design your branding, logo...</p>
+
+            <div class="skills-container">
+                <div class="skill-item">⚛️</div>
+                <div class="skill-item">📱</div>
+                <div class="skill-item">🎨</div>
+                <div class="skill-item">📐</div>
+                <div class="skill-item">💻</div>
+                <div class="skill-item">🔒</div>
+            </div>
+
+            <a href="#portfolio" class="read-more">
+                <span>Read more</span>
+                <div class="read-more-circle">⬇️</div>
+            </a>
+        </main>
     </div>
 </body>
 </html>
