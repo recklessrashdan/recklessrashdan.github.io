@@ -1,145 +1,183 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>My Portfolio</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: #f5f5f5;
-      color: #333;
-      display: flex;
-    }
-    /* Sidebar */
-    .sidebar {
-      width: 250px;
-      background: linear-gradient(180deg, #A50044, #004D98); /* Barça red to blue */
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      height: 100vh;
-    }
-    .sidebar img {
-      width: 120px;
-      border-radius: 50%;
-      margin-bottom: 20px;
-      border: 3px solid #FFD700; /* gold accent */
-    }
-    .nav {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .nav li {
-      margin: 15px 0;
-    }
-    .nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    .nav a:hover {
-      color: #FFD700; /* gold hover */
-    }
-    .socials {
-      margin-top: auto;
-      display: flex;
-      gap: 15px;
-    }
-    .socials a {
-      color: #fff;
-      font-size: 20px;
-      transition: color 0.3s;
-    }
-    .socials a:hover {
-      color: #FFD700;
-    }
-    /* Main content */
-    .main {
-      flex: 1;
-      padding: 60px;
-      position: relative;
-    }
-    .code-snippet {
-      font-family: 'Courier New', monospace;
-      background: #222;
-      color: #0f0;
-      padding: 20px;
-      border-radius: 8px;
-      max-width: 600px;
-    }
-    .cta {
-      margin-top: 30px;
-    }
-    .cta button {
-      background: #A50044; /* Barça red */
-      color: #fff;
-      border: none;
-      padding: 12px 24px;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .cta button:hover {
-      background: #004D98; /* Barça blue */
-    }
-    .read-more {
-      margin-top: 20px;
-      display: inline-block;
-      color: #004D98;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    /* Icons area */
-    .icons {
-      position: absolute;
-      bottom: 40px;
-      display: flex;
-      gap: 20px;
-    }
-    .icons img {
-      width: 40px;
-      height: 40px;
-    }
-  </style>
-</head>
-<body>
-  <div class="sidebar">
-    <img src="my-pic.jpeg" alt="Profile">
-    <ul class="nav">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Portfolio</a></li>
-      <li><a href="#">Who am I?</a></li>
-      <li><a href="#">FR</a></li>
-    </ul>
-    <div class="socials">
-      <a href="#">IG</a>
-      <a href="#">IN</a>
-      <a href="#">BE</a>
-    </div>
-  </div>
-  <div class="main">
-    <div class="code-snippet">
-      <p>01 &lt; Hi, I'm Rashdan! &gt;</p>
-      <p>02 &lt; I design ✏️ and develop 💻 websites. &gt;</p>
-      <p>03 &lt; I also design branding, logos... &gt;</p>
-    </div>
-    <div class="cta">
-      <button>Work with me</button>
-    </div>
-    <a href="#" class="read-more">Read more ↓</a>
-    <div class="icons">
-      <img src="html5.png" alt="HTML5">
-      <img src="css.png" alt="CSS">
-      <img src="js.png" alt="JavaScript">
-      <img src="wordpress.png" alt="WordPress">
-      <img src="xd.png" alt="Adobe XD">
-    </div>
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Personal introduction website for a student learning web development."
+    />
+    <title>Rashdan | Introduction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-container">
+        <a href="#home" class="logo">Rashdan</a>
+        <button class="menu-toggle" aria-label="Toggle navigation menu">☰</button>
+        <nav class="nav-links">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <p class="badge">Student Developer</p>
+            <h1>Hi, I am Rashdan. I like building websites and learning new things.</h1>
+            <p class="hero-text">
+              This website is a short introduction about me, my projects, and
+              the skills I am currently learning.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#projects">View Projects</a>
+              <a class="button button-ghost" href="#contact">Say Hello</a>
+            </div>
+          </div>
+          <div class="hero-card">
+            <img
+              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80"
+              alt="Developer workspace with code on screen"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="container">
+          <h2>About Me</h2>
+          <p class="section-lead">
+            I am a student who enjoys coding, design, and creating projects that
+            improve every week.
+          </p>
+          <div class="about-grid">
+            <article class="card">
+              <h3>My Story</h3>
+              <p>
+                I started learning web development because I wanted to build my
+                own ideas on the internet and share them with others.
+              </p>
+            </article>
+            <article class="card">
+              <h3>What I Am Learning</h3>
+              <p>
+                I focus on HTML, CSS, and JavaScript. I enjoy making pages
+                responsive, clean, and easy to use on phone and desktop.
+              </p>
+            </article>
+            <article class="card">
+              <h3>My Goals</h3>
+              <p>
+                I want to keep learning, build better projects, and become a
+                strong full-stack developer in the future.And be a better football player.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="projects">
+        <div class="container">
+          <h2>My Projects</h2>
+          <p class="section-lead">
+            Here are a few things I have built while learning.
+          </p>
+          <div class="projects-grid">
+            <article class="project-card">
+              <h3>Clock App</h3>
+              <p>
+                A live digital clock app that shows current time and date with
+                a 12-hour / 24-hour format toggle.
+              </p>
+              <a href="projects/clock-app/index.html" aria-label="View Clock App project">View project</a>
+            </article>
+            <article class="project-card">
+              <h3>Study Tracker</h3>
+              <p>
+                A mini app to track homework and goals, built with JavaScript
+                to practice interactivity and local storage.
+              </p>
+              <a href="projects/study-tracker/index.html" aria-label="View Study Tracker project">View project</a>
+            </article>
+            <article class="project-card">
+              <h3>Personal Introduction Page</h3>
+              <p>
+                This website: designed and coded by me as a place to introduce
+                myself and show my progress.
+              </p>
+              <a href="index.html#home" aria-label="View Personal Introduction Page project">View project</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="skills">
+        <div class="container">
+          <h2>Skills</h2>
+          <p class="section-lead">Technologies and tools I am learning.</p>
+          <div class="skills-grid">
+            <span>HTML5</span>
+            <span>CSS3</span>
+            <span>JavaScript (ES6+)</span>
+            <span>Python</span>
+            <span>Git Basics</span>
+            <span>UI Design Basics</span>
+            <span>Git & GitHub</span>
+            <span>Problem Solving</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="contact">
+        <div class="container contact-grid">
+          <div>
+            <h2>Contact</h2>
+            <p class="section-lead">
+              Thanks for visiting my page. Feel free to send a message.
+            </p>
+            <p>Email: rashdanrishan69@gmail.com</p>
+            <p>Location: Your City, Your Country</p>
+          </div>
+          <form class="contact-form" id="contactForm">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required />
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              placeholder="Write your message..."
+              required
+            ></textarea>
+
+            <button class="button button-primary" type="submit">Send Message</button>
+            <p id="formNotice" class="form-notice" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© <span id="year"></span> Rashdan. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
 </html>

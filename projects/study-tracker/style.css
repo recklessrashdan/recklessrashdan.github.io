@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+.app {
+  width: min(700px, 92%);
+  margin: 2rem auto;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 14px;
+  padding: 1.2rem;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+.sub {
+  color: #94a3b8;
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+input {
+  flex: 1;
+  padding: 0.65rem;
+  border-radius: 10px;
+  border: 1px solid #475569;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+button {
+  padding: 0.65rem 1rem;
+  border: none;
+  border-radius: 10px;
+  background: #22c55e;
+  color: #052e16;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 0.65rem;
+  margin-bottom: 0.55rem;
+}
+
+li.done span {
+  text-decoration: line-through;
+  color: #94a3b8;
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.task-actions button {
+  padding: 0.4rem 0.65rem;
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actions a {
+  color: #38bdf8;
+  text-decoration: none;
+}
