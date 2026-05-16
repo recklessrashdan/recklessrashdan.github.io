@@ -7,7 +7,7 @@ const contactForm = document.getElementById("contactForm");
 const formNotice = document.getElementById("formNotice");
 const SUPABASE_URL = "https://netbsdklmpdzttwinyul.supabase.co";
 const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ldGJzZGtsbXBkenR0d2lueXVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDcwMjIsImV4cCI6MjA5MTgyMzAyMn0.iZar7SMCzIJeCZD4dCrRgIQMapJFnwZXby4AhUnHCLg";
+  "sb_publishable_JQ_bCZcDuJh9vfS8zQ15bQ_ZFuysN6j";
 const SUPABASE_TABLE = "contact_messages";
 
 if (menuToggle && navLinks) {
