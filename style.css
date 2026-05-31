@@ -238,6 +238,17 @@ h3 {
   align-items: start;
 }
 
+.contact-grid a:not(.button) {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contact-grid a:not(.button):hover {
+  color: #bae6fd;
+  text-decoration: underline;
+}
+
 .contact-form {
   display: grid;
   gap: 0.55rem;
