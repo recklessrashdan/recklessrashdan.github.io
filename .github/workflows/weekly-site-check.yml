@@ -1,0 +1,33 @@
+name: Weekly website check
+
+on:
+  schedule:
+    # Every Monday at 09:00 UTC
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+jobs:
+  check-and-email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run site health checks
+        id: site_check
+        continue-on-error: true
+        run: bash scripts/weekly-site-check.sh
+
+      - name: Send Gmail report
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.GMAIL_USER }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: "Weekly site report — recklessrashdan.github.io (${{ steps.site_check.outcome }})"
+          to: ${{ secrets.GMAIL_USER }}
+          from: ${{ secrets.GMAIL_USER }}
+          body: file://weekly-site-report.txt
+          priority: normal

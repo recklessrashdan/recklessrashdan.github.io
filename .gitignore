@@ -38,6 +38,7 @@ yarn-error.log*
 # Temporary files
 *.tmp
 *.bak
+weekly-site-report.txt
 
 # Ruby/Bundler
 Gemfile.lock
