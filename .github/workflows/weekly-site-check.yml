@@ -1,4 +1,4 @@
-name: Weekly website check
+name: Daily website check
 
 on:
   schedule:
