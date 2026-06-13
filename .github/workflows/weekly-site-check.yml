@@ -3,7 +3,7 @@ name: Daily website check
 on:
   schedule:
     # Every day at 01:00 UTC
-    - cron: "0 1 * * *"
+    - cron: "0 19 * * *"
   workflow_dispatch:
 
 jobs:
