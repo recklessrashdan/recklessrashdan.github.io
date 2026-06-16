@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Weekly health check for recklessrashdan.github.io
+# Daily health check for recklessrashdan.github.io
 set -euo pipefail
 
 BASE_URL="${SITE_URL:-https://recklessrashdan.github.io}"
-REPORT_FILE="${REPORT_FILE:-weekly-site-report.txt}"
+REPORT_FILE="${REPORT_FILE:-daily-site-report.txt}"
 
 PATHS=(
   "/"
@@ -19,7 +19,7 @@ fail=0
 now_utc="$(date -u '+%Y-%m-%d %H:%M:%S UTC')"
 
 {
-  echo "Weekly Website Health Report"
+  echo "Daily Website Health Report"
   echo "============================"
   echo "Site: ${BASE_URL}"
   echo "Checked: ${now_utc}"

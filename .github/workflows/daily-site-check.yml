@@ -1,9 +1,9 @@
-name: Weekly website check
+name: Daily website check
 
 on:
   schedule:
-    # Every Monday at 09:00 UTC
-    - cron: "0 9 * * 1"
+    # Every day at 01:00 UTC
+    - cron: "0 1 * * *"
   workflow_dispatch:
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
       - name: Run site health checks
         id: site_check
         continue-on-error: true
-        run: bash scripts/weekly-site-check.sh
+        run: bash scripts/daily-site-check.sh
 
       - name: Send Discord report
         env:

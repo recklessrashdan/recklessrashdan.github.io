@@ -20,9 +20,9 @@ I'm a beginner and created this site to share my projects, interests, and a bit 
 
 Thanks for visiting!
 
-## Weekly site check (Discord notification)
+## Daily site check (Discord notification)
 
-A GitHub Action runs every **Monday at 09:00 UTC** and posts a short health report to your Discord server. You can also run it manually from the **Actions** tab → **Weekly website check** → **Run workflow**.
+A GitHub Action runs every day at **01:00 UTC** and posts a short health report to your Discord server. You can also run it manually from the **Actions** tab → **Daily website check** → **Run workflow**.
 
 ### One-time Discord setup
 
@@ -32,6 +32,6 @@ A GitHub Action runs every **Monday at 09:00 UTC** and posts a short health repo
 4. On GitHub, open this repo: **Settings** → **Secrets and variables** → **Actions** → **New repository secret**:
    - `DISCORD_WEBHOOK_URL` — paste the webhook URL (keep it private; anyone with the URL can post to that channel).
 
-5. Push this repo (including `.github/workflows/weekly-site-check.yml`) to GitHub.
+5. Push this repo (including `.github/workflows/daily-site-check.yml`) to GitHub.
 
 After the secret is set, use **Run workflow** once to confirm the message appears in Discord.

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Post weekly-site-report.txt to a Discord channel webhook.
+# Post daily-site-report.txt to a Discord channel webhook.
 set -euo pipefail
 
-REPORT_FILE="${REPORT_FILE:-weekly-site-report.txt}"
+REPORT_FILE="${REPORT_FILE:-daily-site-report.txt}"
 WEBHOOK_URL="${DISCORD_WEBHOOK_URL:?DISCORD_WEBHOOK_URL is not set}"
 CHECK_OUTCOME="${CHECK_OUTCOME:-unknown}"
 
@@ -23,13 +23,13 @@ report = Path(report_path).read_text(encoding="utf-8").strip()
 
 if outcome == "success":
     color = 0x57F287
-    title = "Weekly site check — all OK"
+    title = "Daily site check — all OK"
 elif outcome == "failure":
     color = 0xED4245
-    title = "Weekly site check — issues found"
+    title = "Daily site check — issues found"
 else:
     color = 0xFEE75C
-    title = "Weekly site check"
+    title = "Daily site check"
 
 # Discord embed description limit is 4096; keep report readable in a code block.
 body = report if len(report) <= 3900 else report[:3900] + "\n…(truncated)"
