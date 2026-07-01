@@ -8,7 +8,6 @@ REPORT_FILE="${REPORT_FILE:-daily-site-report.txt}"
 PATHS=(
   "/"
   "/projects/clock-app/index.html"
-   "/projects/Student-Report/Student_Report.py"
   "/style.css"
   "/script.js"
 )
