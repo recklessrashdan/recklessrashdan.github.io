@@ -8,7 +8,7 @@ REPORT_FILE="${REPORT_FILE:-daily-site-report.txt}"
 PATHS=(
   "/"
   "/projects/clock-app/index.html"
-  "https://recklessrashdan.github.io/projects/study-tracker/index.html"
+  "/projects/study-tracker/index.html"
   "/projects/Student-Report/Student_Report"
   "/style.css"
   "/script.js"
