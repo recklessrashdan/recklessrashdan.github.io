@@ -9,7 +9,7 @@ PATHS=(
   "/"
   "/projects/clock-app/index.html"
   "/projects/study-tracker/index.html"
-  "/projects/intro-page/index.html"
+  "/projects//Student-Report/Student_Report"
   "/style.css"
   "/script.js"
 )
