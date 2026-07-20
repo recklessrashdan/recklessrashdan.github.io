@@ -42,8 +42,10 @@ jobs:
           DISCORD_WEBHOOK_URL: ${{ secrets.CONTACT_WEBHOOK_URL }}
 
       - name: Set Discord webhook secret
-        working-directory: workers
-        run: wrangler secret put DISCORD_WEBHOOK_URL --text "$DISCORD_WEBHOOK_URL"
+  run: |
+    echo "$DISCORD_WEBHOOK_URL" | wrangler secret put DISCORD_WEBHOOK_URL
+  env:
+    DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
