@@ -6,26 +6,52 @@ on:
     paths:
       - 'workers/**'
       - '.github/workflows/deploy-contact-worker.yml'
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-      
+          node-version: 22
+
       - name: Install Wrangler
-        run: npm install -g wrangler
-      
-      - name: Deploy Worker
+        run: npm install -g wrangler@4
+
+      - name: Validate secrets
         run: |
-          cd workers
-          echo "$DISCORD_WEBHOOK_URL" | wrangler secret put DISCORD_WEBHOOK_URL
-          wrangler deploy
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "Missing GitHub secret: CLOUDFLARE_API_TOKEN"
+            exit 1
+          fi
+          if [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "Missing GitHub secret: CLOUDFLARE_ACCOUNT_ID"
+            exit 1
+          fi
+          if [ -z "$DISCORD_WEBHOOK_URL" ]; then
+            echo "Missing GitHub secret: CONTACT_WEBHOOK_URL"
+            exit 1
+          fi
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           DISCORD_WEBHOOK_URL: ${{ secrets.CONTACT_WEBHOOK_URL }}
+
+      - name: Set Discord webhook secret
+        working-directory: workers
+        run: wrangler secret put DISCORD_WEBHOOK_URL --text "$DISCORD_WEBHOOK_URL"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.CONTACT_WEBHOOK_URL }}
+
+      - name: Deploy Worker
+        working-directory: workers
+        run: wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
