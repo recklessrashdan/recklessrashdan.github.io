@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 import os
-from datetime import datetime, timezone
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
@@ -29,9 +28,7 @@ def load_env_file() -> None:
 
 load_env_file()
 
-SUPABASE_URL = os.getenv("SUPABASE_URL", "").rstrip("/")
-SUPABASE_ANON_KEY = os.getenv("SUPABASE_ANON_KEY", "")
-SUPABASE_TABLE = os.getenv("SUPABASE_TABLE", "contact_messages")
+DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL", "").strip()
 
 
 class PortfolioHandler(SimpleHTTPRequestHandler):
@@ -47,7 +44,19 @@ class PortfolioHandler(SimpleHTTPRequestHandler):
       if self.path != "/api/contact":
         self.send_json(404, {"error": "Not found"})
         return
-      self.send_json(200, {"ok": True, "message": "Contact endpoint reached"})
+
+      content_length = int(self.headers.get("Content-Length", "0"))
+      raw_body = self.rfile.read(content_length)
+      payload = json.loads(raw_body.decode("utf-8"))
+
+      ok, message = send_to_discord(payload)
+      if not ok:
+        self.send_json(502, {"error": message})
+        return
+
+      self.send_json(200, {"ok": True})
+    except json.JSONDecodeError:
+      self.send_json(400, {"error": "Invalid JSON body"})
     except Exception as error:
       self.send_json(500, {"error": f"Server error: {error}"})
 
@@ -68,32 +77,42 @@ class PortfolioHandler(SimpleHTTPRequestHandler):
     self.wfile.write(response)
 
 
-def main() -> None:
-  server = ThreadingHTTPServer((HOST, PORT), PortfolioHandler)
-  print(f"Server running at http://{HOST}:{PORT}")
-  if not SUPABASE_URL or not SUPABASE_ANON_KEY:
-    print("Warning: SUPABASE_URL / SUPABASE_ANON_KEY missing; /api/contact will fail until configured.")
-  try:
-    server.serve_forever()
-  except KeyboardInterrupt:
-    print("\nStopping server...")
-  finally:
-    server.server_close()
+def sanitize(value: object, max_length: int) -> str:
+  return str(value or "").strip()[:max_length]
 
 
-def save_to_supabase(entry: dict) -> tuple[bool, str]:
-  if not SUPABASE_URL or not SUPABASE_ANON_KEY:
-    return False, "Supabase is not configured. Set SUPABASE_URL and SUPABASE_ANON_KEY."
+def send_to_discord(payload: dict) -> tuple[bool, str]:
+  if not DISCORD_WEBHOOK_URL:
+    return False, "Discord webhook is not configured. Set DISCORD_WEBHOOK_URL."
 
-  endpoint = f"{SUPABASE_URL}/rest/v1/{SUPABASE_TABLE}"
-  payload = json.dumps(entry).encode("utf-8")
-  headers = {
-    "Content-Type": "application/json",
-    "apikey": SUPABASE_ANON_KEY,
-    "Authorization": f"Bearer {SUPABASE_ANON_KEY}",
-    "Prefer": "return=minimal"
+  name = sanitize(payload.get("name"), 120)
+  email = sanitize(payload.get("email"), 254)
+  message = sanitize(payload.get("message"), 4000)
+
+  if not name or not email or not message:
+    return False, "Name, email, and message are required."
+
+  discord_payload = {
+    "embeds": [
+      {
+        "title": "New portfolio contact message",
+        "color": 0x5865F2,
+        "fields": [
+          {"name": "Name", "value": name, "inline": True},
+          {"name": "Email", "value": email, "inline": True},
+          {"name": "Message", "value": message},
+        ],
+        "timestamp": datetime_now_iso(),
+      }
+    ]
   }
-  request = Request(endpoint, data=payload, method="POST", headers=headers)
+
+  request = Request(
+    DISCORD_WEBHOOK_URL,
+    data=json.dumps(discord_payload).encode("utf-8"),
+    method="POST",
+    headers={"Content-Type": "application/json"},
+  )
 
   try:
     with urlopen(request, timeout=10):
@@ -103,14 +122,33 @@ def save_to_supabase(entry: dict) -> tuple[bool, str]:
       details = error.read().decode("utf-8")
     except Exception:
       details = ""
-    message = f"Supabase HTTP {error.code}"
+    message_text = f"Discord HTTP {error.code}"
     if details:
-      message = f"{message}: {details}"
-    return False, message
+      message_text = f"{message_text}: {details}"
+    return False, message_text
   except URLError as error:
-    return False, f"Could not connect to Supabase: {error.reason}"
+    return False, f"Could not connect to Discord: {error.reason}"
   except Exception as error:
-    return False, f"Could not save message: {error}"
+    return False, f"Could not send message: {error}"
+
+
+def datetime_now_iso() -> str:
+  from datetime import datetime, timezone
+
+  return datetime.now(timezone.utc).isoformat()
+
+
+def main() -> None:
+  server = ThreadingHTTPServer((HOST, PORT), PortfolioHandler)
+  print(f"Server running at http://{HOST}:{PORT}")
+  if not DISCORD_WEBHOOK_URL:
+    print("Warning: DISCORD_WEBHOOK_URL missing; /api/contact will fail until configured.")
+  try:
+    server.serve_forever()
+  except KeyboardInterrupt:
+    print("\nStopping server...")
+  finally:
+    server.server_close()
 
 
 if __name__ == "__main__":

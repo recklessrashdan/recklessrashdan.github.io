@@ -5,10 +5,11 @@ const sections = document.querySelectorAll("main section[id]");
 const year = document.getElementById("year");
 const contactForm = document.getElementById("contactForm");
 const formNotice = document.getElementById("formNotice");
-const SUPABASE_URL = "https://netbsdklmpdzttwinyul.supabase.co";
-const SUPABASE_ANON_KEY =
-  "sb_publishable_JQ_bCZcDuJh9vfS8zQ15bQ_ZFuysN6j";
-const SUPABASE_TABLE = "contact_messages";
+// Update this URL after deploying the Cloudflare Worker (see workers/wrangler.toml).
+const CONTACT_API_URL =
+  window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "/api/contact"
+    : "https://recklessrashdan-contact.YOUR_SUBDOMAIN.workers.dev";
 
 if (menuToggle && navLinks) {
   menuToggle.addEventListener("click", () => {
@@ -69,19 +70,12 @@ if (contactForm && formNotice) {
     }
 
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/${SUPABASE_TABLE}`, {
+      const response = await fetch(CONTACT_API_URL, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-          Prefer: "return=minimal"
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          name: payload.name,
-          email: payload.email,
-          message: payload.message
-        })
+        body: JSON.stringify(payload)
       });
 
       if (!response.ok) {
